@@ -16,5 +16,4 @@ for k,c in dictt.items():
 
 print(ans)
 
-# for k,c in dictt.items():
-#     print(f"{k}: {c}")
+
