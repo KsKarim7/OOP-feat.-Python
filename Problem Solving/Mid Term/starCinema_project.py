@@ -19,8 +19,15 @@ class Hall(Star_Cinema):
     def entry_show(self,movie_name,id, time):
         self.show_list.append(tuple((movie_name, id,  time)))
         self.seats[id] =  [[0 for _ in range(self.cols)] for _ in range(self.rows)]
+    
     def book_seats(self,id,seat_id):
-        pass
+        
+        for n in seat_id:
+            if(self.seat[id][n[0]][n[1]] != 0):
+                print("Your preferred seat is already booked! Kindly select other available seats.")
+            else:
+                self.seat[id][n[0]][n[1]] = 1
+
     def view_show_list(self):
         print()
         if(len(self.show_list) > 0):
@@ -71,7 +78,7 @@ class Hall(Star_Cinema):
 
 while(True):
     inp = int(input("1. View all shows today. \n2. View available seat. \n3. Book ticket. \n4. Exit \n\nEnter your option: "))
-    hall1 = Hall(2,2,1)
+    hall1 = Hall(3,3,1)
     hall1.entry_show("Fighter",77,"12.01")
     if(inp == 1):
         hall1.view_show_list()
@@ -79,3 +86,5 @@ while(True):
         break
     elif(inp == 2):
         hall1.view_available_seats(77)
+    elif(inp == 3):
+        hall1.book_seats(77,[(1,1),(0,0)])
