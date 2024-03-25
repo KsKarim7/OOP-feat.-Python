@@ -1,2 +1,4 @@
-tup = (11,22,33)
-print(tup[2])
+tup = {11:"123"}
+if 10 not in tup:
+    print("error")
+    
