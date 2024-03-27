@@ -1,5 +1,5 @@
 # cook your dish here
-form abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 
 class User(ABC):
     def __init__(self,name,phone,email,address) -> None:
@@ -8,10 +8,11 @@ class User(ABC):
         self.address = address
         self.phone = phone
         
-    def Customer(User):
+class Customer(User):
         def __init__(self,name,phone,email,address,money):
             self.wallet = money
             self.__order = None
+            self.due_amount = 0
             super().__init__(name,phone,email,address)
         
         @property
@@ -24,7 +25,8 @@ class User(ABC):
         
         def place_order(self,order):
             self.order = order
-            print(f"{self.name} place an order {order.items}")
+            self.bill_due += order.bill
+            print(f"{self.name} place an order with its bill {order.bill}")
         
         def eat_food(self,order):
             print(f'{self.name} item food {order.items}')
@@ -47,7 +49,7 @@ class Employee(User):
             self.department = department
             self.due = salary
         
-        def reveive_salary(self):
+        def receive_salary(self):
             self.due = 0            
         
 class Chef(Employee):
@@ -56,7 +58,7 @@ class Chef(Employee):
         self.cooking_item = cooking_item
         
 class Server(Employee):
-    def __init__(self,name,phone,email,address,salary,starting_date,department,cooking_item):
+    def __init__(self,name,phone,email,address,salary,starting_date,department):
         self.tips_earned = 0
         super().__init__(name,phone,email,address,salary,starting_date,department)
     
@@ -74,7 +76,7 @@ class Server(Employee):
         
         
 class Manager(Employee):
-    def __init__(self,name,phone,email,address,salary,starting_date,department,cooking_item):
+    def __init__(self,name,phone,email,address,salary,starting_date,department):
         self.tips_earned = 0
         super().__init__(name,phone,email,address,salary,starting_date,department)
 

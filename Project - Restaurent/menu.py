@@ -13,19 +13,19 @@ class Burger(Food):
         self.ingredients = ingredients
         
 class Pizza(Food):
-    def __init__(self,name,price,size,topings):
+    def __init__(self,name,price,size,toppings):
         super().__init__(name,price)
         self.size = size
-        self.topings = topings
+        self.toppings = toppings
         
-class Burger(Food):
+class Drinks(Food):
     def __init__(self,name,price,isCold = True):
         super().__init__(name,price)
         self.isCold = isCold
     
 # composition    
 class Menu:
-    def __init__():
+    def __init__(self):
         self.pizzas = []
         self.burgers = []
         self.drinks = []
@@ -34,18 +34,18 @@ class Menu:
         if(item_type == 'pizza'):
             self.pizzas.append(item)
         elif(item_type == 'burger'):
-            self.burger.append(item)
+            self.burgers.append(item)
         elif(item_type == 'drinks'):
             self.drinks.append(item)
             
     def remove_pizza(self,pizza):
-        if pizza in slef.pizzas:
+        if pizza in self.pizzas:
             self.pizzas.remove(pizza)
             
     def show_menu(self):
         for pizza in self.pizzas:
-            print(f"name: {pizza.name} price{pizza.price}")
-        for b in self.burders:
-            print(f"name: {b.name} price{b.price}")
+            print(f"name: {pizza.name} price: {pizza.price}")
+        for b in self.burgers:
+            print(f"name: {b.name} price: {b.price}")
         for d in self.drinks:
-            print(f"name: {d.name} price{d.price}")
+            print(f"name: {d.name} price: {d.price}")
