@@ -1,7 +1,7 @@
-from account import Account
+from bank import Bank
 import random  
 
-class User(Account):
+class User(Bank):
     users = []
     def __init__(self,name,email,address,typ) -> None:
         super().__init__(name,email,address)
@@ -37,12 +37,14 @@ class User(Account):
             print(f"***{k}: {v}***")
 
     def take_loan(self,amount):
-        if(self.loan_limit <= 0):
+        if(self.loan_limit <= 0 and Bank.if_loan == False):
             print('Your loan limit exceeded.')
         else:
             self.loan_limit -= 1
             self.balance += amount
             self.transactions['Loan'] += amount
+            Bank.balance -= amount
+            Bank.loans += amount
     
     def transfer_money(self,amount,to_user):
         if(amount < self.balance):
