@@ -7,7 +7,7 @@ class User(Bank):
         super().__init__(name,email,address)
         User.users.append(name)
         self.typ = typ
-        self.acc_no = name[:2] + random.randint(7,77)
+        self.acc_no = str(name[:2]) + str(random.randint(7,77))
         self.loan_limit = 2
         self.transactions = {
             "Deposit": 0,
@@ -29,16 +29,19 @@ class User(Bank):
         else:
             print("You are Bankrupt ❌")
 
-    def __str__(self):
-        return f'You current account balance is ${self.balance}'
+    def __repr__(self):
+        return f'Your current account balance is ${self.balance}'
 
     def transaction_history(self):
         for k,v in self.transactions.items():
             print(f"***{k}: {v}***")
 
     def take_loan(self,amount):
-        if(self.loan_limit <= 0 and Bank.if_loan == False):
-            print('Your loan limit exceeded.')
+        if(self.loan_limit <= 0 or Bank.if_loan == False):
+            if(self.loan_limit <= 0):
+                print('Your loan limit exceeded.')
+            else:
+                print("Sorry, Bank is current eligible for giving loans.")
         else:
             self.loan_limit -= 1
             self.balance += amount

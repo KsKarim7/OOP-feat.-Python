@@ -11,7 +11,7 @@ class Admin(Bank):
         User.users.remove(name)
 
     def user_accounts(self):
-        print('The numbers are:', ' '.join(user for user in User.users))
+        print('Current users:', ' '.join(user for user in User.users))
 
     def show_balance(self):
         print(Bank.balance)
