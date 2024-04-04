@@ -49,15 +49,19 @@ class User(Bank):
             self.transactions['Loan'] += amount
             Bank.balance -= amount
             Bank.loans += amount
-    def transfer_money(self,amount,to_user):
-        if(amount < self.balance):
-            # for i in Bank.users:
-                # if()
-            if(to_user.name in Bank.users):
-                to_user.balance += amount
-                self.balance -= amount
-            else:
-                print("Account does not exist")
+    def transfer_money(self,amount,user):
+        if(amount <= self.balance):
+            for i in Bank.users:
+                if(i.name == user):
+                    i.balance += amount
+                    self.balance -= amount
+                    print("Money transferred successfully!!")
+                    
+            # if(to_user.name in Bank.users):
+            #     to_user.balance += amount
+            #     self.balance -= amount
+                else:
+                    print("Account does not exist")
         else:
             print("Insufficient balance!")
         

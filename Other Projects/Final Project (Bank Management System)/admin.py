@@ -7,11 +7,14 @@ class Admin(Bank):
 
     
 
-    def delete_user(self,name):
-        User.users.remove(name)
+    def delete_user(self,user):
+        for i in Bank.users:
+            if(i.name == user):
+                Bank.users.remove(i)
+                print("User removed. ✅")
 
     def user_accounts(self):
-        print('Current users:', ' '.join(user for user in User.users))
+        print('Current users:', ', '.join(user.name for user in User.users))
 
     def show_balance(self):
         print(Bank.balance)

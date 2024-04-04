@@ -33,39 +33,44 @@ def main():
     # user3.take_loan(100000000000000000000000000000000000000000000000)
 
 
+    z = -1
     while(True):
         n = int(input("-> Press 1 to create an User account. \n-> Press 2 to create an Admin account. \n"))
+     
+        userList = Bank.users
         if(n == 1):
             print("Kindly fill the follow form to create your account. \n")
             name = input("Your name: ")
             email = input("Your email: ")
             address = input("Your permanent address: ")
             accTyp = input("Account type: ")
-            user1 = User(name,email,address,accTyp)
+            # user1 = User(name,email,address,accTyp)
+            userList.append(User(name,email,address,accTyp))
+            z+=1
+            print(userList)
 
             print("\nYour bank account has been created successfully! \n")
             print("Select the following options: \n")
-            
             while(True):
                 m = int(input("1. Deposit money. \n2. Withdraw money. \n3. My current balance. \n4. Previous Transactions. \n5. Transfer money. \n6. Take loan. \n7. Back to previous page.\nInput box: "))
 
                 if(m == 1):
                     amount = int(input("Input your amount: "))
-                    user1.deposit(amount)
+                    userList[z].deposit(amount)
                 elif(m == 2):
                     amount = int(input("Input your amount: "))
-                    user1.withdraw(amount)
+                    userList[z].withdraw(amount)
                 elif(m == 3):
-                    print(user1)
+                    print(userList[z])
                 elif(m == 4):
-                    user1.transaction_history()
+                    userList[z].transaction_history()
                 elif(m == 5):
                     a = int(input("How much? "))
                     i = input("To whom you want to transfer your money?")
-                    user1.transfer_money(a,i)
+                    userList[z].transfer_money(a,i)
                 elif(m == 6):
                     l = int(input("Amount: "))
-                    user1.take_loan(l)
+                    userList[z].take_loan(l)
                 else:
                     break
             
@@ -81,11 +86,11 @@ def main():
             print("Select the following options: \n")
             
             while(True):
-                m = int(input("1. Delete account. \n2. See all users. \n3. Bank balance. \n4. Money on loan. \n5. Switch loan feature. \n. 6.Back to previous page. \nInput box: "))
+                m = int(input("1. Delete account. \n2. See all users. \n3. Bank balance. \n4. Money on loan. \n5. Switch loan feature. \n6. Back to previous page. \nInput box: "))
 
                 if(m == 1):
                     inp = input("User name? ")
-                    admin.delete_user("inp")
+                    admin.delete_user(inp)
                 elif(m == 2):
                     admin.user_accounts()
                 elif(m == 3):

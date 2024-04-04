@@ -10,4 +10,4 @@ class Bank(ABC):
         self.name = name
         self.email = email
         self.address = address
-        Bank.users.append(name)
+        # Bank.users.append(name)
