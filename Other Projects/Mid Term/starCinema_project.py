@@ -20,17 +20,21 @@ class Hall(Star_Cinema):
         self.__show_list.append(tuple((movie_name, id,  time)))
         self.__seats[id] =  [[0 for _ in range(self.cols)] for _ in range(self.rows)]
     
-    def book_seats(self,id,seat_id):
+    def book_seats(self,id,seat_no):
         if(id not in self.__seats):
             print("-----------------\nKindly provide a valid id! \n-----------------")
-        for n in seat_id:
-            if(n[0] > self.rows or n[1] > self.cols):
-                print("Invalid Seat Number\n")
-            else:
-                if(self.__seats[id][n[0]][n[1]] != 0):
-                    print("Your preferred seat is already booked! Kindly select other available seats.")
+        else:
+            for n in seat_no:
+                col = n[0]
+                row = n[1]
+                if(col > self.rows or row > self.cols):
+                    print("Invalid Seat Number\n")
                 else:
-                    self.__seats[id][n[0]][n[1]] = 1
+                    if(self.__seats[id][col][row] != 0):
+                        print("Your preferred seat is already booked! Kindly select other available seats.")
+                    else:
+                        self.__seats[id][col][row] = 1
+
 
     def view_show_list(self):
         print()
@@ -44,25 +48,42 @@ class Hall(Star_Cinema):
         flag = False
         for i in self.__show_list:
             if(i[1] == id):
-                print("Updated seats matrix for Hall no. ",self.hall_no)
+                print(f"Updated seats matrix for hall no. {self.hall_no}\n")
+                for row in self.__seats[id]:
+                    print(row)
+                    # for elem in row:
+                    #     print(elem, end=" ")
+                    # print()
+                print()
                 flag = True
-                print("\n",self.__seats[id],"\n********************\n")  # show the seat that are available for the show
         if(flag == False):
             print("-----------------\nKindly provide a valid id! \n-----------------")
 
 
 
 hall1 = Hall(3,3,1)
-hall1.entry_show("Fighter",77,"12.01")
+Hall.entry_hall(hall1)
+hall1.entry_show("Fighter",77,"01-04-2024 9.01 AM")
+hall1.entry_show("The Art Of Racing In the Rain",48,"06-04-2024 16.01 PM")
 
 while(True):
     inp = int(input("1. View all shows today. \n2. View available seat. \n3. Book ticket. \n4. Exit \n\nEnter your option: "))
     if(inp == 1):
         hall1.view_show_list()
-    elif(inp == 4):
-        break
     elif(inp == 2):
         n = int(input("Enter show id: "))
         hall1.view_available_seats(n)
     elif(inp == 3):
-        hall1.book_seats(77,[(4,1),(0,0)])
+        id = int(input("Enter show id: "))
+        tickets = int(input("Number of tickets: "))
+        lst = []
+        for i in range(tickets):
+            row = int(input("Enter Seat Row no.: "))
+            column = int(input("Enter Seat Column no.: "))
+            lst.append(tuple((row,column)))
+        hall1.book_seats(id,lst)
+        print()
+        lst = []
+    elif(inp == 4):
+        print("Thank you for staying with us ! ")
+        break
